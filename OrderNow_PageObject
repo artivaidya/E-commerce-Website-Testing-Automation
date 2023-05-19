@@ -1,0 +1,287 @@
+package com.pageObjects;
+
+
+import java.util.List;
+import java.util.concurrent.TimeoutException;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.CacheLookup;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.base.BasePage;
+
+public class OrderNow extends BasePage {
+	public WebDriverWait  Wait;
+
+	//Constructor
+	public OrderNow(WebDriver driver) {
+		super(driver);
+		
+	}
+	@FindBy(xpath="//input[@name='postalCode']")
+	@CacheLookup
+	public WebElement postbtn;
+	
+	@FindBy(xpath="//button[contains(text(),'FIND STORE')]")
+	@CacheLookup
+	public WebElement findstorebtn;
+	
+	@FindBy(xpath="//header/section[1]/div[1]/div[1]/div[1]/div[2]/ul[1]/li[3]/button[1]/picture[1]/img[1]")
+	public WebElement Clkicon;
+	
+	@FindBy(xpath = "//body/div[@id='__next']/div[1]/div[1]/div[2]/div[1]/nav[1]/div[2]/button[1]")
+	@CacheLookup
+	public WebElement loginbtn;
+	
+	@FindBy(xpath = "//input[@name=\"email\"]")
+	@CacheLookup
+	public WebElement emailTxt;
+
+	@FindBy(xpath = "//input[@name=\"password\"]")
+	@CacheLookup
+	public WebElement pwdText;
+	
+	//@FindBy(xpath = "//button[contains(text(),'login')]")
+	@FindBy(xpath = "//button[@type=\"submit\"]")
+	@CacheLookup
+	public WebElement loginsubmitbtn;
+	
+	
+	@FindBy(xpath="//h1[contains(text(),'Hello')]")
+	@CacheLookup
+	public WebElement Hellotxt;
+	
+
+	@FindBy(xpath="//button[contains(text(),'ORDER NOW')]")
+	@CacheLookup
+	public WebElement ordernowbtn;
+	
+	@FindBy(xpath = "//*[@id=\"__next\"]/div/main/div/div/div/div/div/div[4]/div[2]/div/button")
+	@CacheLookup
+	public WebElement order;
+	
+	@FindBy(xpath="//button[contains(text(),'CONFIRM')]")
+	public WebElement confirm;
+	
+	
+	@FindBy(xpath="//*[@id=\"header-portal\"]")
+	@CacheLookup
+	public WebElement Headerlinks;
+	
+	@FindBy(xpath="//*[@id=\"__next\"]/div/main/div/div/div/button/div")
+	@CacheLookup
+	public WebElement dietpreferences;
+	
+	@FindBy(xpath="//body/div[3]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/h3[1]")
+	@CacheLookup
+	public WebElement diettext;
+	
+	@FindBy(xpath="(//input[@type='checkbox'])[4]")
+	@CacheLookup
+	public WebElement milk;
+	
+	
+	@FindBy(xpath="//button[normalize-space()='SAVE'])[1]")
+	@CacheLookup
+	public WebElement savebtn;
+	
+	
+	@FindBy(xpath="//a[@id='71921']")
+	@CacheLookup
+	public WebElement pocket;
+	
+	
+	@FindBy(xpath="(//section[@class='Store_productSection__EIbdT'])[2]")
+	@CacheLookup
+	public WebElement pocketbtn;
+	
+	@FindBy(xpath="/html/body/div[3]/div/div[2]/div/div[2]/div[2]/div")
+	@CacheLookup
+	public WebElement dietcheckboxes;	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//------------------------------Action methods------------------------------------------
+		public void settextpost(String Postcode) {
+		Wait= new WebDriverWait(driver,20);
+		Wait.until(ExpectedConditions.visibilityOf(postbtn));
+		postbtn.sendKeys(Postcode);
+}
+	
+		public void setfindstore() {
+		Wait=new WebDriverWait(driver,20);
+		Wait.until(ExpectedConditions.visibilityOf(findstorebtn));
+		findstorebtn.click();
+	}
+		
+		public void Iconclick() {
+			Wait =new WebDriverWait(driver,10);
+			Wait.until(ExpectedConditions.visibilityOf(Clkicon));
+			Clkicon.click();
+			
+		}
+		
+		public void loginclick() throws TimeoutException {
+			Wait = new WebDriverWait(driver, 10);
+			Wait.until(ExpectedConditions.elementToBeClickable(loginbtn));
+			loginbtn.click();
+		}
+		
+		public WebElement settxtemail(String user) {
+
+			// WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
+			Wait = new WebDriverWait(driver, 10);
+			Wait.until(ExpectedConditions.visibilityOf(emailTxt));
+			emailTxt.sendKeys(user);
+			return emailTxt;
+		}
+
+		// Send text to password field
+		public WebElement settxtpassword(String pwd) {
+			Wait = new WebDriverWait(driver, 10);
+			Wait.until(ExpectedConditions.visibilityOf(pwdText));
+			pwdText.sendKeys(pwd);
+			return pwdText;
+		}
+
+		// Click on submit button
+		public WebElement clkbtnSubmit() throws TimeoutException {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("window.scrollBy(0,600);");
+			Wait = new WebDriverWait(driver, 20);
+			 Wait.until(ExpectedConditions.elementToBeClickable(loginsubmitbtn));
+			//driver.switchTo().activeElement();
+			return loginsubmitbtn;
+			
+			
+		}
+		
+			
+		public WebElement sethellotxt() {
+			Wait=new WebDriverWait(driver,20);
+			Wait.until(ExpectedConditions.visibilityOf(Hellotxt));
+			//Hellotxt.click();
+			return Hellotxt;
+		}
+		public WebElement setordernowbtn() {
+			Wait=new WebDriverWait(driver,50);
+			Wait.until(ExpectedConditions.visibilityOf(ordernowbtn));
+			ordernowbtn.click();
+			//return ordernowbtn;
+			return ordernowbtn;
+		}
+		public WebElement orderNow() {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("window.scrollBy(0,600);");
+			Wait = new WebDriverWait(driver, 50);
+			Wait.until(ExpectedConditions.elementToBeClickable(order));
+			order.click();
+			return order;
+		}
+		public void confirm() {
+			Wait=new WebDriverWait(driver,30);
+			Wait.until(ExpectedConditions.elementToBeClickable(confirm));
+			confirm.click();
+		}
+		
+		public List<WebElement> Headerlinks() {
+			Wait = new WebDriverWait(driver, 30);
+		     Wait.until(ExpectedConditions.elementToBeClickable(Headerlinks));
+		     List<WebElement> links =Headerlinks.findElements(By.tagName("a"));
+		     return links;
+		}
+		public WebElement dietpreferences() {
+			Wait = new WebDriverWait(driver, 30);
+		     Wait.until(ExpectedConditions.elementToBeClickable(dietpreferences));
+		     dietpreferences.click();
+		     return dietpreferences;
+		}
+		     public WebElement milk() {
+					Wait=new WebDriverWait(driver,30);
+					Wait.until(ExpectedConditions.elementToBeClickable(milk));
+					//milk.click();
+					return milk;
+				}
+		
+		     public WebElement savebtn() {
+					Wait=new WebDriverWait(driver,30);
+					Wait.until(ExpectedConditions.visibilityOf(savebtn));
+					//savebtn.click();
+					return savebtn;
+				}
+		     
+		     public WebElement diettext() {
+					Wait=new WebDriverWait(driver,30);
+					Wait.until(ExpectedConditions.visibilityOf(diettext));
+					diettext.click();
+					return diettext;
+				}
+		     public void pocket() {
+		    	 //JavascriptExecutor js = (JavascriptExecutor) driver;
+					//js.executeScript("window.scrollBy(0,600);");
+					Wait = new WebDriverWait(driver, 30);
+				     Wait.until(ExpectedConditions.elementToBeClickable(pocket));
+				   //  List<WebElement> links =pocket.findElements(By.tagName("img"));
+				    pocket.click();
+				    // return pocket;
+		     }
+		
+		    
+				
+		     public List<WebElement> pocketbtn() {
+		    	 //JavascriptExecutor js = (JavascriptExecutor) driver;
+					//js.executeScript("window.scrollBy(0,600);");
+					Wait = new WebDriverWait(driver, 50);
+				     Wait.until(ExpectedConditions.elementToBeClickable(pocketbtn));
+				     List<WebElement> links =pocketbtn.findElements(By.tagName("img"));
+				     return links;
+		     };
+		/*public WebElement setordernowbtn() throws TimeoutException {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("window.scrollBy(0,600);");
+			Wait = new WebDriverWait(driver, 20);
+			 Wait.until(ExpectedConditions.elementToBeClickable(ordernowbtn));
+			//driver.switchTo().activeElement();
+			return ordernowbtn;
+			
+			
+		}	*/
+		     public List <WebElement > dietcheckboxes() {
+		    	 JavascriptExecutor js = (JavascriptExecutor) driver;
+					js.executeScript("window.scrollBy(0,600);");
+					Wait=new WebDriverWait(driver,30);
+					Wait.until(ExpectedConditions.elementToBeClickable(dietcheckboxes));
+					List <WebElement> checkbtn= driver.findElements(By.tagName("input"));
+					 dietcheckboxes.click();
+					return  checkbtn;
+				}
+		
+
+	
+	
+		
+	}
+	
